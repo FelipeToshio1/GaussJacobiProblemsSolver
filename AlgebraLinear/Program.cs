@@ -7,14 +7,14 @@ namespace AlgebraLinear
     class Program
     {
 
-        private static readonly double[,] matrix = new double[4, 4]
+        private static readonly double[,] matrix = new double[7, 7]
             {
-                {7,1,2,3}, {1,4,1,1}, {1,1,5,2}, {3,2,1,9}
+                {17,1,2,3,1,3,1}, {1,14,1,1,3,5,1}, {1,1,15,2,1,3,2}, {3,2,1,19,3,1,2}, {1,2,2,3,20,1,1 }, {3,2,1,4,3,21,2}, {1,2,3,4,5,3,22}
             };
 
         private static readonly double[] vectorResult = new double[]
         {
-            3,4,5,6
+            3,4,5,6,7,8,9,1
         };
 
         private static readonly double marginOfError = 0.01;
@@ -45,18 +45,17 @@ namespace AlgebraLinear
         {
             var auxNumbers = new List<double>()
             {
-                0,0,0,0
+                0,0,0,0,0,0,0
             };
 
             var auxList = new List<double>()
             {
-                0,0,0,0
+                0,0,0,0,0,0,0
             };
 
             bool isAboveMarginOfError = false;
 
             var iterations = 0;
-            var maxIterations = 50;
 
             double total;
 
@@ -102,7 +101,8 @@ namespace AlgebraLinear
 
         private static bool CheckIfItHasASimpleSolution(List<double> diagonal)
         {
-            for (int i = 0; i < diagonal.Count; i++) //this can be changed to a foreach
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 var sum = CatchMatrixLineSum(i);
 
@@ -117,7 +117,7 @@ namespace AlgebraLinear
         private static double CatchMatrixLineSum(int i)
         {
             var sum = 0.0;
-            for (int j = 0; j < 4; j++) //it has to be another way to this for
+            for (int j = 0; j < matrix.GetLength(0); j++)
             {
                 if (j != i)
                 {
@@ -131,9 +131,9 @@ namespace AlgebraLinear
         {
             var mainDiagonal = new List<double>();
 
-            for (var i = 0; i < 4; i++)
+            for (var i = 0; i < matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
                     if (i == j)
                     {
